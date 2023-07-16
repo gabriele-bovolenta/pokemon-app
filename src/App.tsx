@@ -1,25 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./Pages/HomePage/HomePage";
+import DetailPokemonPage from "./Pages/DetailPage/DetailPage";
+import Navbar from "./Components/Navbar/navbar.component";
+import SearchPokemonPage from "./Pages/SearchPokemonPage/SearchPokemonPage";
+
+const router = createBrowserRouter([
+  { 
+    path: "/", 
+    element: 
+    <>
+      <Navbar></Navbar>
+      <HomePage /> 
+    </>
+  },
+  { 
+    path: "/home", 
+    element:
+    <>
+      <Navbar></Navbar>
+      <HomePage /> 
+    </>
+  },
+  {
+    path: "/pokemon",
+    element: (
+      <>
+        <Navbar></Navbar>
+        <SearchPokemonPage />
+      </>
+    ),
+  },
+  {
+    path: "/pokemon/:pokemon",
+    element: (
+      <>
+        <Navbar></Navbar>
+        <DetailPokemonPage searchIdType={false} />
+      </>
+    ),
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
